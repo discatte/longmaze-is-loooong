@@ -1,4 +1,4 @@
-# longmaze-is-long
+# longmaze is loooooong
 Rendering mazes in ruby with longcat sprites
 
 Made with `Ruby 2.3.3p222` so if you have any trouble use something like `rbenv` to install that version.
