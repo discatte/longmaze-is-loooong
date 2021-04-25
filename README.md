@@ -5,4 +5,4 @@ Made with `Ruby 2.3.3p222` so if you have any trouble use something like `rbenv`
 
 Run with `gem install bundler` - `bundle install` and then `bundle exec ruby mazecat.rb`
 
-![mazecats](https://raw.githubusercontent.com/discatte/longmaze-is-long/main/mazecats.png)
+![mazecats](https://raw.githubusercontent.com/discatte/longmaze-is-loooong/main/mazecats.png)
