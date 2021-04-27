@@ -1,10 +1,13 @@
 require 'theseus'
+require 'theseus/algorithms/kruskal'
+require 'theseus/algorithms/prim'
 require 'pry'
 
 class MazeCat
   attr_accessor :maze
   attr_accessor :tile_images
   attr_accessor :tile_lookup
+  attr_accessor :tileset
   attr_accessor :maze_image
   attr_accessor :maze_step
 
@@ -13,12 +16,18 @@ class MazeCat
     self.tile_lookup = {}
     self.maze_step = 0
 
+    # TILESET (original, bbcmicro)
+    self.tileset = "original"
+
     load_tiles
     build_tile_lookup
 
     # generate an orthogonal maze and turn it into loooong cats
     # use .new to generated step by step instead of generate
-    self.maze = Theseus::OrthogonalMaze.generate(width: 20, height: 10, weave: 100, braid: 25)
+    self.maze = Theseus::OrthogonalMaze.generate(width: 30, height: 15, weave: 100, braid: 50, randomness: 100)
+    # EXTRA OPTIONS:
+    # algorithm: Theseus::Algorithms::Kruskal or Prim
+    # maask: Theseus::Mask.from_png("heartomask.png")
 
     # Render full maze
     #File.open("maze.png", "w") { |f| f.write(maze.to(:png)) }
@@ -40,7 +49,7 @@ class MazeCat
   def load_tiles
     print "Loading tiles..."
 
-    tile_image_names = Dir.glob("tiles/*.png")
+    tile_image_names = Dir.glob("tiles-#{tileset}/*.png")
 
     tile_image_names.each do |name|
       name_without_extension_or_path = File.basename(name, ".*")
@@ -67,10 +76,10 @@ class MazeCat
     tile_lookup["--------"] = "nocat"
 
     # One exit
-    tile_lookup["N-------"] = "longcatbeans-n" 
+    tile_lookup["N-------"] = "longcat-n" 
     tile_lookup["-S------"] = "longcat-s" 
     tile_lookup["--W-----"] = "longcat-w" 
-    tile_lookup["---E----"] = "longcatbeans-e" 
+    tile_lookup["---E----"] = "longcat-e" 
 
     # Two exit
     tile_lookup["NS------"] = "longcatislong-ns" 
